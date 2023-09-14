@@ -35,6 +35,7 @@ static NSString *const playbackRate = @"rate";
 
     NSDictionary * _videoInfo;
 
+    NSString * _streamSavingPath;
 }
 
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
@@ -378,6 +379,26 @@ static NSString *const playbackRate = @"rate";
 -(void)setVideoAspectRatio:(NSString *)ratio{
     char *char_content = [ratio cStringUsingEncoding:NSASCIIStringEncoding];
     [_player setVideoAspectRatio:char_content];
+}
+
+-(void)setRecordingStateStream:(NSString *)recordingStateStream{
+    if ([recordingStateStream isEqualToString:@"1"]) {
+       BOOL success = [_player startRecordingAtPath:_streamSavingPath];
+       NSLog(@"Recording started successfully at %@", _streamSavingPath);
+    }
+
+    if ([recordingStateStream isEqualToString:@"2"]) {
+        BOOL stopSuccess = [_player stopRecording];
+        NSLog(@"Recording stopped successfully.");
+    }
+}
+
+- (void)setStreamSavingPath:(NSString *)streamSavingPath
+{
+    NSURL *url = [NSURL URLWithString:streamSavingPath];
+    _streamSavingPath = [url path];
+
+    NSLog(@"_streamSavingPath %@", _streamSavingPath);
 }
 
 - (void)setMuted:(BOOL)value

@@ -231,6 +231,19 @@ export type VLCPlayerProps = VLCPlayerCallbackProps & {
    * React native view stylesheet styles
    */
   style?: StyleProp<ViewStyle>;
+
+  /**
+   * Declare whether video recording will occur:
+   * '0' - Do nothing.
+   * '1' - Start recording video.
+   * '2' - Stop recording.
+   */
+  recordingStateStream?: '0' | '1' | '2';
+
+  /**
+   * Set path where should stream be saved
+   */
+  streamSavingPath?: string;
 };
 
 /**
