@@ -111,7 +111,7 @@ static NSString *const playbackRate = @"rate";
     _player = [[VLCMediaPlayer alloc] init];
 	// [bavv edit end]
 
-//     [_player setDrawable:self];
+    [_player setDrawable:self];
     _player.delegate = self;
     _player.scaleFactor = 0;
     VLCMedia *media = [VLCMedia mediaWithURL:_uri];
@@ -147,7 +147,7 @@ static NSString *const playbackRate = @"rate";
     _player = [[VLCMediaPlayer alloc] init];
     // [bavv edit end]
 
-//     [_player setDrawable:self];
+    [_player setDrawable:self];
     _player.delegate = self;
     _player.scaleFactor = 0;
 
