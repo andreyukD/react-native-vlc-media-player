@@ -236,20 +236,6 @@ static NSString *const playbackRate = @"rate";
                                       @"duration":[NSNumber numberWithInt:[_player.media.length intValue]]
                                       });
                 break;
-            case VLCMediaPlayerStateEnded:
-                NSLog(@"VLCMediaPlayerStateEnded %i",  _player.numberOfAudioTracks);
-                int currentTime   = [[_player time] intValue];
-                int remainingTime = [[_player remainingTime] intValue];
-                int duration      = [_player.media.length intValue];
-
-                self.onVideoEnded(@{
-                                    @"target": self.reactTag,
-                                    @"currentTime": [NSNumber numberWithInt:currentTime],
-                                    @"remainingTime": [NSNumber numberWithInt:remainingTime],
-                                    @"duration":[NSNumber numberWithInt:duration],
-                                    @"position":[NSNumber numberWithFloat:_player.position]
-                                    });
-                break;
             case VLCMediaPlayerStateError:
                 NSLog(@"VLCMediaPlayerStateError %i", _player.numberOfAudioTracks);
                 self.onVideoError(@{
@@ -383,12 +369,12 @@ static NSString *const playbackRate = @"rate";
 
 -(void)setRecordingStateStream:(NSString *)recordingStateStream{
     if ([recordingStateStream isEqualToString:@"1"]) {
-       BOOL success = [_player startRecordingAtPath:_streamSavingPath];
+       [_player startRecordingAtPath:_streamSavingPath];
        NSLog(@"Recording started successfully at %@", _streamSavingPath);
     }
 
     if ([recordingStateStream isEqualToString:@"2"]) {
-        BOOL stopSuccess = [_player stopRecording];
+        [_player stopRecording];
         NSLog(@"Recording stopped successfully.");
     }
 }
