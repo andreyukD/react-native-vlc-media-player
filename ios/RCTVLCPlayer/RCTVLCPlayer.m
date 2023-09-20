@@ -363,21 +363,8 @@ static NSString *const playbackRate = @"rate";
 
 
 - (void)setVideoAspectRatio:(NSString *)ratio {
-    if (ratio != nil) {
-        NSString *aspectRatioString = [NSString stringWithCString:ratio encoding:NSASCIIStringEncoding];
-
-        // Check if the conversion was successful
-        if (aspectRatioString) {
-            // Pass the NSString to the _player's method
-            [_player setVideoAspectRatio:aspectRatioString];
-        } else {
-            // Handle the case where the conversion failed (e.g., invalid encoding)
-            NSLog(@"Failed to convert C-string to NSString.");
-        }
-    } else {
-        // Handle the case where 'ratio' is nil
-        NSLog(@"'ratio' argument is nil.");
-    }
+//     char *char_content = [ratio cStringUsingEncoding:NSASCIIStringEncoding];
+//     [_player setVideoAspectRatio:char_content];
 }
 
 -(void)setRecordingStateStream:(NSString *)recordingStateStream{
