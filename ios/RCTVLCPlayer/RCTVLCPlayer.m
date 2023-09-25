@@ -144,10 +144,16 @@ static NSString *const playbackRate = @"rate";
     NSURL* _uri    = [NSURL URLWithString:uri];
     NSDictionary* initOptions = [source objectForKey:@"initOptions"];
 
+    NSString* enableDisplay    = [source objectForKey:@"enableDisplay"];
+
     _player = [[VLCMediaPlayer alloc] init];
     // [bavv edit end]
 
-    [_player setDrawable:self];
+   NSLog(@"enableDisplay %@", enableDisplay);
+    if ([enableDisplay isEqualToString:@"1"]) {
+       [_player setDrawable:self];
+    }
+
     _player.delegate = self;
     _player.scaleFactor = 0;
 
@@ -158,7 +164,9 @@ static NSString *const playbackRate = @"rate";
     }
 
     _player.media = media;
-    _player.media.delegate = self;
+    if ([enableDisplay isEqualToString:@"1"]) {
+        _player.media.delegate = self;
+    }
     [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
     NSLog(@"autoplay: %i",autoplay);
     self.onVideoLoadStart(@{
